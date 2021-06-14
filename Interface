@@ -1,0 +1,37 @@
+//PEMBUATAN INTERFACE
+public interface Weapon {
+   public void attack (GameCharacter attacker, GameCharacter enemy );
+   public int getDamage();
+}
+
+//IMPLEMENTASI INTERFACE
+
+public class Sword extends Item implements Weapon{
+   public Sword (){
+       setName("Sword");
+   }
+
+   public String toString(){
+       return String.format("%s   %d", getName(),getDamage());
+   }
+
+   @Override
+   public int getDamage() {
+       return 9;
+   }
+
+   @Override
+   public void attack(GameCharacter attacker, GameCharacter enemy) {
+       if (((Monster)enemy).isFlyingUnit()){
+           System.out.println("Enemy out of range");
+       }else{
+           attacker.attackEnemy(enemy);
+
+       }
+   }
+}
+
+
+
+
+
