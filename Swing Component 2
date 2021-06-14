@@ -1,0 +1,147 @@
+//JCOMBOBOX
+List<Department> departments = new ArrayList<>();
+departments.add(new Department) (1,"S1 Kedokteran",1999);
+departments.add(new Department) (2,"S1 Teknik Informatika",1998);
+departments.add(new Department) (3,"S1 Teknik Elektro",1997);
+DefaultComboBoxModel<Department> departmentDefaultComboBoxModel =
+   new DefaultComboBoxModel<>(departments.toArray(new Department [0]));
+comboBox1.setModel(departmentDefaultComboBoxModel);
+
+//AbstractTableModel
+
+private static class StudentTableModel extends AbstractTableModel {
+   private List<Student> students;
+   private  final String[] COLUMNS = {"ID", "FIRST NAME", "LAST NAME", "DEPARTMENT"};
+
+   public StudentTableModel(List<Student> students) {
+       this.students = students;
+   }
+
+   @Override
+   public int getRowCount() {
+       return students.size();
+   }
+
+   @Override
+   public int getColumnCount() {
+       return COLUMNS.length;
+   }
+
+   @Override
+   public Object getValueAt(int rowIndex, int columnIndex) {
+       return switch(columnIndex){
+           case 0 -> students.get(rowIndex).getId();
+           case 1 -> students.get(rowIndex).getFirstName();
+           case 2 -> students.get(rowIndex).getLastName();
+           case 3 -> students.get(rowIndex).getDepartment().getName();
+           default -> "";
+       };
+   }
+
+   @Override
+   public String getColumnName(int column) {
+       return COLUMNS[column];
+   }
+
+   @Override
+   public Class<?> getColumnClass(int columnIndex) {
+       if (getValueAt(0,columnIndex)!=null){
+           return getValueAt(0, columnIndex).getClass();
+       }
+       return Object.class;
+   }
+}
+
+//AbstractTableModel - MAIN
+tableStudent.setModel(studentTableModel);
+tableStudent.setAutoCreateRowSorter(true);
+
+
+//ADD JTABLE
+saveButton.addActionListener(e -> {
+   if(textId.getText().trim().isEmpty() || txtFirstName.getText().trim().isEmpty()|| txtAddress.getText().trim().isEmpty()|| comboDepartment.getSelectedItem() == null){
+       JOptionPane.showMessageDialog(rootPanel,"Please fill id, first name, address, " +
+               "and department", "Error", JOptionPane.ERROR_MESSAGE);
+   }else{
+       Student student = new Student();
+       student.setId(textId.getText());
+       student.setFirstName(txtFirstName.getText());
+       student.setLastName(txtLastName.getText().trim().isEmpty() ? null : txtLastName.getText());
+       student.setAddress(txtAddress.getText());
+       student.setDepartment((Department) comboDepartment.getSelectedItem());
+       try {
+           if (studentDao.addData(student) == 1){
+               students.clear();
+               students.addAll(studentDao.fetchAll());
+               studentTableModel.fireTableDataChanged();
+           }
+       }catch (SQLException|ClassNotFoundException throwables){
+           throwables.printStackTrace();
+       }
+   }
+});
+
+//UPDATE JTABLE
+
+tableStudent.getSelectionModel().addListSelectionListener(e -> {
+   if(!tableStudent.getSelectionModel().isSelectionEmpty()){
+       int selectedIndex =
+               tableStudent.convertRowIndexToModel(tableStudent.getSelectedRow());
+   selectedStudent = students.get(selectedIndex);
+   if(selectedStudent != null){
+       textId.setText(selectedStudent.getId());
+       txtFirstName.setText(selectedStudent.getFirstName());
+       txtLastName.setText(selectedStudent.getLastName()!=null ?
+               selectedStudent.getLastName() : " ");
+       txtAddress.setText(selectedStudent.getAddress());
+       comboDepartment.setSelectedItem(selectedStudent.getDepartment());
+       textId.setEnabled(false);
+       saveButton.setEnabled((false));
+       updateButton.setEnabled((true));
+       }
+   }
+   
+ //UPDATE JTABLE - BUTTON
+updateButton.addActionListener(e -> {
+   if(txtFirstName.getText().trim().isEmpty() || comboDepartment.getSelectedItem()== null){
+       JOptionPane.showMessageDialog(rootPanel,"Please fill first ame, address, and " + " department", "Error", JOptionPane.ERROR_MESSAGE);
+   }else{
+       selectedStudent.setFirstName(txtFirstName.getText());
+       selectedStudent.setLastName(txtLastName.getText().trim().isEmpty() ? null :
+               txtLastName.getText());
+       try {
+           if (studentDao.updateData(selectedStudent) == 1){
+               students.clear();
+               students.addAll(studentDao.fetchAll());
+               studentTableModel.fireTableDataChanged();
+               clearAndReset();
+           }
+       }catch (SQLException | ClassNotFoundException throwables){
+           throwables.printStackTrace();
+       }
+   }
+});
+ //UPDATE JTABLE - CLEAR AND RESET
+ private void clearAndReset(){
+   textId.setText("");
+   txtFirstName.setText("");
+   txtLastName.setText("");
+   txtAddress.setText("");
+   textId.setEnabled(true);
+   saveButton.setEnabled(true);
+   updateButton.setEnabled(false);
+   tableStudent.clearSelection();
+   selectedStudent = null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
