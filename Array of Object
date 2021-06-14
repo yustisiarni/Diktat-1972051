@@ -1,0 +1,51 @@
+//Deklarasi & Inisiasi
+private Book[] buku;
+
+public BookList(){
+   Book[] list = new Book[0];
+   this.buku = list;
+}
+
+//MEMPROSES ARRAY 1
+int panjang = apa.size();
+for (int i = 0; i < panjang; i++) {
+   int dur = apa.get(i).getDuration();
+   String jdl = apa.get(i).getTitle();
+   System.out.printf("%-20s %15s %n",jdl,dur);
+}
+
+//MEMPROSES ARRAY 2
+
+for (Item a : arr){
+   if (a instanceof Shoe){
+       System.out.println(a.toString());
+   }
+}
+
+//CONTOH COLLECTION
+
+public class University {
+
+   private Employee employee;
+   private List<Employee> arr;
+
+   public University() {
+       arr = new ArrayList<Employee>();
+   }
+
+   public List<Employee> getEmployees(){
+       return arr;
+   }
+
+   public String getNextEmployeeId(){
+       int size = arr.size();
+       if (size == 0){
+           return "000001";
+       }
+       else {
+           return "00000"+ (size-1);
+       }
+
+   }
+}
+
