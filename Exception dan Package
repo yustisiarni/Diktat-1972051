@@ -1,0 +1,27 @@
+//EXCEPTION
+
+else if(choice==3){
+   try {
+       System.out.print("Index = ");
+       int idx = sc.nextInt();
+       System.out.print("Number = ");
+       int v = sc.nextInt();
+       arr.addValueToArray(idx, v);
+   }catch (InputMismatchException e){
+       System.out.println("Input harus bilangan");
+       sc.nextLine();
+   }
+}
+
+//CUSTOM EXCEPTION
+public class ArrayException extends Exception {
+
+   public ArrayException(){
+
+   }
+
+   public ArrayException(String message){
+       super(message);
+   }
+}
+
