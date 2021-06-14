@@ -1,0 +1,30 @@
+//PEMBUATAN FORM
+public static void main(String[] args) {
+   JFrame frame = new JFrame("PSRGameLogin");
+   frame.setContentPane(new PSRGameLogin().rootGame);
+   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   frame.pack();
+   frame.setVisible(true);
+   frame.setLocationRelativeTo(null);
+}
+
+PLAYButton.addActionListener(e -> {
+   if (txtFirstN==null||txtFirstN.getText().isEmpty()||txtLastN==null||txtLastN.getText().isEmpty()){
+       JOptionPane.showMessageDialog(rootGame,"Please fill all field",
+               "Error",JOptionPane.ERROR_MESSAGE);
+       PSRGameLogin frame= new PSRGameLogin();
+   }else{
+       Person orang = new Person(txtFirstN.getText(),txtLastN.getText());
+       UserStatic stat = new UserStatic();
+       orang.setUserStatic(stat);
+       PSRGame frame = new PSRGame();
+       frame.setUser(orang);
+       frame.name.setText(frame.person.toString());
+   }
+});
+
+public void receiveDate (String firstName,String lastName){
+   labelFirstName.setText(firstName);
+   labelLastName.setText(lastName);
+}
+
