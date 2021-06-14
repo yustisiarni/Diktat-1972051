@@ -1,0 +1,134 @@
+//STATIC
+public class ConverterCalculator {
+   public static String convertToBinary(int number){
+       return coreConverterFromDecimal(number,2);
+   }
+   public static String convertToHexa(int number){
+       return coreConverterFromDecimal(number,16);
+   }
+   public static String convertToOctal(int number){
+       return coreConverterFromDecimal(number,8);
+   }
+   public static int convertBinaryToDecimal(String number){
+       return coreConverterToDecimal(number,2);
+   }
+   public static int convertHexaToDecimal(String number){
+       return coreConverterToDecimal(number,16);
+   }
+   public static String coreConverterFromDecimal(int number,int radix){
+       StringBuilder a = new StringBuilder();
+       String num = Integer.toString(number,radix);
+       if (number > 0){
+           a.append(num);
+           a.reverse();
+           int index = 0;
+           int cap = a.length();
+           while (index < cap){
+               if (radix == 2 || radix == 16){
+                   index +=4;
+               }
+               else if (radix == 8){
+                   index +=3;
+               }
+               if (index >= cap){
+                   break;
+               }
+               a.insert(index," ");
+               index +=1;
+           }
+       }
+       a.reverse();
+       return a.toString();
+   }
+   public static int coreConverterToDecimal(String numberString,int radix){
+       int isi=0;
+       if (radix == 16){
+           Boolean bnar = Pattern.matches("[a-fA-F]",numberString);
+           if (!bnar){
+               isi = Integer.parseInt(numberString,radix);
+           }
+           else{
+               isi =0;
+           }
+       }
+       else if (radix ==2){
+           String regex = "([2-9]+)";
+           Pattern pattern = Pattern.compile(regex);
+           Matcher matcher = pattern.matcher(numberString);
+           if (!matcher.find()){
+               isi = Integer.parseInt(numberString,radix);
+           }
+           else{
+               isi =0;
+           }
+       }
+       return isi;
+   }
+}
+
+//STATIC - MAIN 
+public class ConverterCalculatorDemo {
+   public static void main(String[] args) {
+       int number = 20000;
+       System.out.println(ConverterCalculator.convertToBinary(number));
+       System.out.println(ConverterCalculator.convertToHexa(number));
+       System.out.println(ConverterCalculator.convertToOctal(number));
+
+       String string1 = "FF";
+       System.out.println(ConverterCalculator.convertHexaToDecimal(string1));
+       String string2 = "256a";
+       System.out.println(ConverterCalculator.convertHexaToDecimal(string2));
+       String string3 = "1112";
+       System.out.println(ConverterCalculator.convertBinaryToDecimal(string3));
+       String string4 = "110011001111";
+       System.out.println(ConverterCalculator.convertBinaryToDecimal(string4));
+
+   }
+}
+
+//FINAL ON VARIBLE
+
+private double pie = Math.PI;
+
+@Override
+public double getVolume() {
+   return (4*pie*Math.pow(radius,3))/3;
+}
+
+//FINAL ON METHOD
+
+public class shoe extends item{
+	Public final String getName(){
+    return "baju";
+  }
+}
+
+//FINAL ON CLASS
+public final class Mobil {
+    
+    private String nama;
+    
+    public String getNama() {
+        return nama;
+    }
+ 
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+}
+
+//INNER CLASS
+public class mainForm {
+			public class KeyHandler implements KeyListener{...}
+		}
+
+
+
+
+
+
+
+
+
+
+
