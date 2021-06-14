@@ -1,0 +1,91 @@
+//DAOSERVICE
+public interface DaoService <T>{
+   List<T> fetchAll() throws SQLException,ClassNotFoundException;
+}
+//MYSQLCONNECTION
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class MySQLConnection {
+
+   private static final String URL = "jdbc:mysql://localhost:3306/demodb";
+   private static final String USERNAME = "root_demodb";
+   private static final String PASSWORD = "";
+
+   public static Connection createConnection() throws ClassNotFoundException, SQLException {
+       Class.forName("com.mysql.cj.jdbc.Driver");
+       Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+       connection.setAutoCommit(false);
+       return connection;
+   }
+
+}
+//DepartmentDaoImpl
+public class DepartmentDaoImpl implements DaoService<Department> {
+   @Override
+   public List<Department> fetchAll() throws SQLException, ClassNotFoundException {
+       List<Department> departments = new ArrayList<>();
+       String query = "SELECT id, name FROM department";
+       try (Connection connection = MySQLConnection.createConnection()) {
+           try (PreparedStatement ps = connection.prepareStatement(query)) {
+               try (ResultSet rs = ps.executeQuery()) {
+                   while (rs.next()){
+                       Department department = new Department();
+                       department.setId((rs.getInt("id")));
+                       department.setName(rs.getString("name"));
+                       departments.add(department);
+                   }
+               }
+           }
+       }
+
+       return departments;
+   }
+}
+
+//StudentImpl
+public class StudentDaoImpl implements DaoService<Student> {
+   @Override
+   public List<Student> fetchAll() throws SQLException, ClassNotFoundException {
+       List<Student> students  = new ArrayList<>();
+       String query = "SELECT s.id,first_name,last_name,address,department_id,name FROM" +
+               "student s JOIN department d ON s.department_id = d.id";
+       try (Connection connection = MySQLConnection.createConnection()) {
+           try (PreparedStatement ps = connection.prepareStatement(query)) {
+               try (ResultSet rs = ps.executeQuery()) {
+                   Department department = new Department();
+                   department.setId(rs.getInt("department_id"));
+                   department.setName((rs.getString("namer")));
+                   Student student = new Student();
+                   student.setId(rs.getString("id"));
+                   student.setFirstName(rs.getString("first_name"));
+                   student.setLastName(rs.getString("address"));
+                   student.setDepartment(department);
+                   students.add(student);
+               }
+           }
+       }
+       return students;
+   }
+}
+//DAO - MAIN FORM
+departmentDao = new DepartmentDaoImpl();
+studentDao = new StudentDaoImpl();
+
+departments = new ArrayList<>();
+students = new ArrayList<>();
+
+
+//FETCH DATA
+try{
+   departments.addAll(departmentDao.fetchAll());
+   students.addAll(studentDao.fetchAll());
+}catch (SQLException|ClassNotFoundException throwables){
+   throwables.printStackTrace();
+}
+
+
+
+
+
