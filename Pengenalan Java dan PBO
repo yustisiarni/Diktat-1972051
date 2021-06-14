@@ -1,0 +1,126 @@
+//Pengenalan deklarasi class dan method
+public class WordReverserDemo {
+   public static void main(String[] args) {
+
+       Scanner scanner = new Scanner(System.in);
+       System.out.print("Input kalimat (0 untuk keluar) : ");
+       String kalimat = scanner.nextLine();
+       do {
+           WordReverser balik = new WordReverser();
+           System.out.print("Hasil pembalikan: ");
+           String hasil = balik.reverseWord(kalimat);
+           System.out.println(hasil);
+           System.out.print("Input kalimat (0 untuk keluar) : ");
+           kalimat = scanner.nextLine();
+       } while (!kalimat.equals("0"));
+   }
+}
+
+//Basic Rules
+
+public class Kotak {
+   private int x;
+   private int y;
+   private int panjang;
+   private int lebar;
+
+   public void atas(int y) {this.y += 1;}
+   public void bawah(int y) {this.y -= 1;}
+   public void kanan(int x) {this.x += 1;}
+   public void kiri(int x) {this.x -= 1;}
+}
+
+
+//NAMING RULES
+
+public class WordReverser {
+   public static String reverseWord(String kata){
+       StringBuffer rev = new StringBuffer(kata);
+       rev.reverse();
+       return rev.toString();
+   }
+
+}
+
+//PSEUDOCODE
+//            IF pilihan == 1
+//                hasil == convertToBinary(number)
+//            ELSE IF pilihan == 2
+//                hasil == convertToOctal(number)
+//            ELSE IF pilihan == 3
+//                hasil == convertToHex(number)
+
+if (pil == 1) {
+   hasil = conv.convertToBinary(num);
+} else if (pil == 2) {
+   hasil = conv.convertToOctal(num);
+} else if (pil == 3) {
+   hasil = conv.convertToHex(num);
+}
+
+//Eksekusi Java Statement
+System.out.println("1. Decimal to Binary");
+System.out.println("2. Decimal to Octal");
+System.out.println("3. Decimal to Hex");
+System.out.println("4. Exit")
+
+
+//Single Selection Statement
+if (pil == 1) {
+   print("Masukkan bunga deposito:");
+   
+ //Double Selection Statement
+ if (pil == 1) {
+   hasil = conv.convertToBinary(num);
+} else if (pil == 2) {
+   hasil = conv.convertToOctal(num);
+} else if (pil == 3) {
+   hasil = conv.convertToHex(num);
+}
+
+//Nested if..else
+If (number < 3){
+	print("Satu")
+} else if ( number > 3) {
+	If (number == 4){
+		print("empat")
+	} else if (number == 7){
+	print("tujuh")}
+}
+
+//while
+while (sec!=0) {
+   tim.setSecond(sec);
+   System.out.println("Converted Time : " + tim.showTime());
+   System.out.print("Input time (second,0 to exit) : ");
+   sec = scanner.nextInt();
+}
+
+//FOR
+for (int i = 1; i <= brpa; i++) {
+   System.out.println("Day " + i);
+   System.out.printf("1. Training with Tigress%n2. Training with Mantis%n3. Training with Viper%n4. Training with Monkey%n5. Training with Crane%nChoose wisely: ")
+};
+
+//Do...While
+String kalimat = scanner.nextLine();
+do {
+   WordReverser balik = new WordReverser();
+   System.out.print("Hasil pembalikan: ");
+   String hasil = balik.reverseWord(kalimat);
+   System.out.println(hasil);
+   System.out.print("Input kalimat (0 untuk keluar) : ");
+   kalimat = scanner.nextLine();
+} while (!kalimat.equals("0"));
+
+
+
+   
+
+
+
+
+
+
+
+
