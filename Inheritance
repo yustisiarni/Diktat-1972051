@@ -1,0 +1,179 @@
+// SHAPE
+public abstract class Shape {
+   public abstract void showDetail();
+}
+//ThreeDimensionalShape
+
+
+public abstract class ThreeDimensionalShape extends Shape{
+
+   public abstract double getVolume();
+   public abstract double getSurfaceArea();
+
+   @Override
+   public void showDetail() {
+       DecimalFormat frm = new DecimalFormat("0.00");
+       System.out.println("Volume of "+ toString()+" is: "+ frm.format(getVolume()));
+       System.out.println("Surface area of "+ toString()+" is: "+ frm.format(getSurfaceArea()));
+   }
+}
+
+//Class Cylinder dan Sphere
+
+
+public class Cylinder extends ThreeDimensionalShape {
+   private double radius;
+   private double height;
+   public double getRadius() {
+       return radius;
+   }
+   public void setRadius(double radius) {
+       this.radius = radius;
+   }
+   public double getHeight() {
+       return height;
+   }
+   public void setHeight(double height) {
+       this.height = height;
+   }
+   @Override
+   public double getVolume() {
+       return Math.PI*Math.pow(radius,2)*height;
+   }
+   @Override
+   public double getSurfaceArea() {
+       return (2*Math.PI*radius*height) + (2*Math.PI*Math.pow(radius,2));
+   }
+   public String toString(){
+       String a = this.getClass().getSimpleName();
+       return a;
+   }
+}
+
+
+public class Sphere extends ThreeDimensionalShape {
+   private double radius;
+
+   public double getRadius() {
+       return radius;
+   }
+
+   public void setRadius(double radius) {
+       this.radius = radius;
+   }
+
+   @Override
+   public double getVolume() {
+       return (4*Math.PI*Math.pow(radius,3))/3;
+   }
+
+   @Override
+   public double getSurfaceArea() {
+       return 4*Math.PI*Math.pow(radius,2);
+   }
+
+   public String toString(){
+       String a = this.getClass().getSimpleName();
+       return a;
+   }
+}
+
+//KEYWORD SUPER
+public class Employee extends Person{
+
+   private String id;
+   private Date date;
+
+   public Employee(){
+
+   }
+
+   public Employee(String id) {
+       this.id = id;
+   }
+
+   public Employee(String firstName,Date joinDate, String lastName, String id) {
+       super(firstName, lastName);
+       this.date = joinDate;
+       this.id = id;
+   }
+
+   public String getId() {
+       return id;
+   }
+
+   public void setId(String id) {
+       this.id = id;
+   }
+
+   public Date getDate() {
+       return date;
+   }
+
+   public void setDate(Date date) {
+       this.date = date;
+   }
+}
+
+//OVERRIDE
+
+public abstract class ThreeDimensionalShape extends Shape{
+
+   public abstract double getVolume();
+   public abstract double getSurfaceArea();
+
+   @Override
+   public void showDetail() {
+       DecimalFormat frm = new DecimalFormat("0.00");
+       System.out.println("Volume of "+ toString()+" is: "+ frm.format(getVolume()));
+       System.out.println("Surface area of "+ toString()+" is: "+ frm.format(getSurfaceArea()));
+   }
+}
+
+
+public class Sphere extends ThreeDimensionalShape {
+   private double radius;
+
+   public double getRadius() {
+       return radius;
+   }
+
+   public void setRadius(double radius) {
+       this.radius = radius;
+   }
+
+   @Override
+   public double getVolume() {
+       return (4*Math.PI*Math.pow(radius,3))/3;
+   }
+
+   @Override
+   public double getSurfaceArea() {
+       return 4*Math.PI*Math.pow(radius,2);
+   }
+
+   public String toString(){
+       String a = this.getClass().getSimpleName();
+       return a;
+   }
+}
+
+//ABSTRACT CLASS
+public abstract class Shape {
+   public abstract void showDetail();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
